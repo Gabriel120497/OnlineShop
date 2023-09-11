@@ -1,7 +1,11 @@
+import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { ShoppingCartIcon } from '@heroicons/react/24/solid'
+import { ShoppingCartContext } from '../../Context';
 
 const Navbar = () => {
-    const activeStyle = 'underline underline-offset-4'
+    const activeStyle = 'underline underline-offset-4';
+    const context = useContext(ShoppingCartContext);
 
     return (
         <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light'>
@@ -26,7 +30,7 @@ const Navbar = () => {
                         className={({ isActive }) =>
                             isActive ? activeStyle : undefined
                         }>
-                        Clothes
+                        Men's Clothes
                     </NavLink>
                 </li>
                 <li>
@@ -35,7 +39,7 @@ const Navbar = () => {
                         className={({ isActive }) =>
                             isActive ? activeStyle : undefined
                         }>
-                        Electronics
+                        Women's Clothes
                     </NavLink>
                 </li>
                 <li>
@@ -44,7 +48,7 @@ const Navbar = () => {
                         className={({ isActive }) =>
                             isActive ? activeStyle : undefined
                         }>
-                        Furnitures
+                        Electronics
                     </NavLink>
                 </li>
                 <li>
@@ -53,16 +57,7 @@ const Navbar = () => {
                         className={({ isActive }) =>
                             isActive ? activeStyle : undefined
                         }>
-                        Toys
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to='/others'
-                        className={({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }>
-                        Others
+                        jewelery
                     </NavLink>
                 </li>
             </ul>
@@ -97,8 +92,9 @@ const Navbar = () => {
                         Sign In
                     </NavLink>
                 </li>
-                <li>
-                 0
+                <li className='flex items-center'>
+                    <ShoppingCartIcon className='h-6 w-6 text-black' />
+                    <div>{context.count}</div>
                 </li>
             </ul>
         </nav>
