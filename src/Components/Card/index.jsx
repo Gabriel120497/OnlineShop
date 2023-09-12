@@ -4,12 +4,16 @@ import { ShoppingCartContext } from "../../Context"
 
 const Card = (data) => {
     const context = useContext(ShoppingCartContext);
-    const addItem = () => {
-        context.setCount(context.count + 1)
+    const addItem = (event, data) => {
+        event.stopPropagation();
+        context.setCount(context.count + 1);
+        context.setCart([...context.cart, data]);
+        context.openCheckoutSideMenu();
+        context.closeProductDetail();
     };
     const showProduct = (ProductDetail) => {
         context.openProductDetail();
-        context.setProductToShow(ProductDetail)
+        context.setProductToShow(ProductDetail);
     }
 
     return (
@@ -21,7 +25,7 @@ const Card = (data) => {
                 <img className='w-full object-cover rounded-lg h-full' src={data.data.image} alt={data.data.description} />
                 <div
                     className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'
-                    onClick={addItem}>
+                    onClick={(event) => addItem(event, data.data)}>
                     <PlusIcon className='h-6 w-6 text-black' />
                 </div>
             </figure>
